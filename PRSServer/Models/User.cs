@@ -11,7 +11,7 @@ namespace PRSServer
         public int Id { get; set; }
         [StringLength(30)]
         [Required]
-        public string UserName { get; set; } // should be unique
+        public string UserName { get; set; }
         [StringLength(30)]
         [Required]
         public string Password { get; set; }
@@ -22,11 +22,9 @@ namespace PRSServer
         [Required]
         public string LastName { get; set; }
         [StringLength(12)]
-        [Required]
-        public string? Phone { get; set; }
+        public string Phone { get; set; }
         [StringLength(255)]
-        [Required]
-        public string? Email { get; set; }
+        public string Email { get; set; }
         public bool IsReviewer { get; set; } = false;
         public bool IsAdmin { get; set; } = false;
 

@@ -11,7 +11,7 @@ namespace PRSServer
         public int Id { get; set; }
         [StringLength(10)]
         [Required]
-        public string Code { get; set; } // should be unique
+        public string Code { get; set; }
         [StringLength(30)]
         [Required]
         public string Name { get; set; }
@@ -28,11 +28,9 @@ namespace PRSServer
         [Required]
         public string Zip { get; set; }
         [StringLength(12)]
-        [Required]
-        public string? Phone { get; set; }
+        public string Phone { get; set; }
         [StringLength(255)]
-        [Required]
-        public string? Email { get; set; }
+        public string Email { get; set; }
 
 
 

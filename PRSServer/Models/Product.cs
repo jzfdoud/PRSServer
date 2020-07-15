@@ -12,7 +12,7 @@ namespace PRSServer.Models
         public int Id { get; set; }
         [StringLength(30)]
         [Required]
-        public string PartNbr { get; set; } //unique
+        public string PartNbr { get; set; }
         [StringLength(30)]
         [Required]
         public string Name { get; set; }
@@ -22,8 +22,7 @@ namespace PRSServer.Models
         [Required]
         public string Unit { get; set; }
         [StringLength(225)]
-        [Required]
-        public string? PhotoPath { get; set; } // what is green line for under ?
+        public string PhotoPath { get; set; }
 
         public int VendorId { get; set; }
         public virtual Vendor Vendor { get; set; }

@@ -8,66 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using PRSServer;
 using PRSServer.Data;
 
-namespace PRSServer.Models
+namespace PRSServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class VendorsController : ControllerBase
     {
         private readonly PRSDBContext _context;
 
-        public UsersController(PRSDBContext context)
+        public VendorsController(PRSDBContext context)
         {
             _context = context;
         }
 
-        // GET: api/Users
+        // GET: api/Vendors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> GetUser()
+        public async Task<ActionResult<IEnumerable<Vendor>>> GetVendor()
         {
-            return await _context.User.ToListAsync();
+            return await _context.Vendor.ToListAsync();
         }
 
-        // GET: api/Users/5
+        // GET: api/Vendors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<User>> GetUser(int id)
+        public async Task<ActionResult<Vendor>> GetVendor(int id)
         {
-            var user = await _context.User.FindAsync(id);
+            var vendor = await _context.Vendor.FindAsync(id);
 
-            if (user == null)
+            if (vendor == null)
             {
                 return NotFound();
             }
 
-            return user;
+            return vendor;
         }
 
-        [HttpGet("{userName}/{password}")]
-        public async Task<ActionResult<User>> Login(string userName, string password)
-        {
-            var login = await _context.User.SingleOrDefaultAsync(u => u.UserName == userName && u.Password == password);
-
-            if (login == null)
-            {
-                return NotFound();
-            }
-
-            return login;
-        }
-
-
-        // PUT: api/Users/5
+        // PUT: api/Vendors/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutUser(int id, User user)
+        public async Task<IActionResult> PutVendor(int id, Vendor vendor)
         {
-            if (id != user.Id)
+            if (id != vendor.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(user).State = EntityState.Modified;
+            _context.Entry(vendor).State = EntityState.Modified;
 
             try
             {
@@ -75,7 +61,7 @@ namespace PRSServer.Models
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UserExists(id))
+                if (!VendorExists(id))
                 {
                     return NotFound();
                 }
@@ -88,37 +74,37 @@ namespace PRSServer.Models
             return NoContent();
         }
 
-        // POST: api/Users
+        // POST: api/Vendors
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<User>> PostUser(User user)
+        public async Task<ActionResult<Vendor>> PostVendor(Vendor vendor)
         {
-            _context.User.Add(user);
+            _context.Vendor.Add(vendor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUser", new { id = user.Id }, user);
+            return CreatedAtAction("GetVendor", new { id = vendor.Id }, vendor);
         }
 
-        // DELETE: api/Users/5
+        // DELETE: api/Vendors/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> DeleteUser(int id)
+        public async Task<ActionResult<Vendor>> DeleteVendor(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var vendor = await _context.Vendor.FindAsync(id);
+            if (vendor == null)
             {
                 return NotFound();
             }
 
-            _context.User.Remove(user);
+            _context.Vendor.Remove(vendor);
             await _context.SaveChangesAsync();
 
-            return user;
+            return vendor;
         }
 
-        private bool UserExists(int id)
+        private bool VendorExists(int id)
         {
-            return _context.User.Any(e => e.Id == id);
+            return _context.Vendor.Any(e => e.Id == id);
         }
     }
 }

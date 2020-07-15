@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PRSServer.Data;
 
 namespace PRSServer.Migrations
 {
     [DbContext(typeof(PRSDBContext))]
-    partial class PRSDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200715124937_addedRequestLine")]
+    partial class addedRequestLine
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
