@@ -32,6 +32,8 @@ namespace PRSServer
             {
                 options.UseLazyLoadingProxies();
                 options.UseSqlServer(Configuration.GetConnectionString("PRSDBContext"));
+                //options.UseSqlServer(Configuration.GetConnectionString("Winhost"));
+
             });
 
             services.AddCors();
@@ -56,6 +58,12 @@ namespace PRSServer
             {
                 endpoints.MapControllers();
             });
+
+            using var scope = app.ApplicationServices
+                                    .GetRequiredService<IServiceScopeFactory>()
+                                    .CreateScope();
+            scope.ServiceProvider.GetService<PRSDBContext>()
+                                    .Database.Migrate();
         }
     }
 }

@@ -100,6 +100,12 @@ namespace PRSServer.Models
             return CreatedAtAction("GetUser", new { id = user.Id }, user);
         }
 
+        [HttpPost("update/{id}")]
+        public async Task<IActionResult> UpdateUser(int id,User user)
+            {
+                return await PutUser(id, user);
+            }
+
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
@@ -115,6 +121,17 @@ namespace PRSServer.Models
 
             return user;
         }
+
+        //[HttpPost("delete/{id}")]
+        //public async Task<ActionResult<User>> DeleteUser(int id)
+        //{
+        //    var user = await _context.Users.FindAsync(id);
+        //    if(user == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //}
+        //figure out what needs to be done here^
 
         private bool UserExists(int id)
         {
