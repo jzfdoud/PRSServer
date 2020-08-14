@@ -58,6 +58,8 @@ namespace PRSServer.Controllers
                 return NotFound();
             }
 
+            await RefreshRequestLine(requestLine);
+            await RecalculateRequestTotal(requestLine.RequestId);
             return requestLine;
         }
 
@@ -91,7 +93,7 @@ namespace PRSServer.Controllers
             }
 
             await RefreshRequestLine(requestLine);
-            await RecalculateRequestTotal(requestLine.Request.Id);
+            await RecalculateRequestTotal(requestLine.RequestId);
             return NoContent();
         }
 
@@ -105,7 +107,7 @@ namespace PRSServer.Controllers
             await _context.SaveChangesAsync();
 
             await RefreshRequestLine(requestLine);
-            await RecalculateRequestTotal(requestLine.Request.Id);
+            await RecalculateRequestTotal(requestLine.RequestId);
 
             return CreatedAtAction("GetRequestLine", new { id = requestLine.Id }, requestLine);
         }
@@ -123,6 +125,8 @@ namespace PRSServer.Controllers
             _context.RequestLine.Remove(requestLine);
             await _context.SaveChangesAsync();
 
+            await RefreshRequestLine(requestLine);
+            await RecalculateRequestTotal(requestLine.RequestId);
             return requestLine;
         }
 
