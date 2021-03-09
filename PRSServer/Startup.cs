@@ -31,8 +31,8 @@ namespace PRSServer
             services.AddDbContext<PRSDBContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseSqlServer(Configuration.GetConnectionString("PRSDBContext"));
-                //options.UseSqlServer(Configuration.GetConnectionString("Winhost"));
+                //options.UseSqlServer(Configuration.GetConnectionString("PRSDBContext"));
+                options.UseSqlServer(Configuration.GetConnectionString("Winhost"));
 
             });
 
